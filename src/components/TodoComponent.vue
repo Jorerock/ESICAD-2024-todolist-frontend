@@ -25,6 +25,7 @@ const onCancelText = () => {
 </script>
 
 <template>
+      <element :class="{ checked: props.todo.done }">
     <span v-if="!editMode">
         <span @click="editMode = !editMode">
             {{ props.todo.label }}
@@ -39,11 +40,26 @@ const onCancelText = () => {
         <button @click="onCancelText">Annuler</button>
         <br />
     </span>
-
+</element>
 </template>
 
-<style lang="css" scoped>
-.done {
-    color: green;
+
+<style scoped>
+.checked {
+  background-color: rgb(207 232 220);
+  border: 2px solid rgb(79 185 227);
+  padding: 0px;
+  margin: 10px;
+  border-radius: 5px;
 }
+
+element:not(.checked) {
+  background-color: rgb(232, 207, 207);
+  border: 2px solid rgb(227, 79, 91);
+  padding: 0px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+
 </style>

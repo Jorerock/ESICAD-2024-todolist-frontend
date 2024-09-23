@@ -1,0 +1,25 @@
+.Menu {
+    display: flex;
+  }
+  
+  .Menu > div {
+    flex: 1;
+  }
+  
+  template{
+    display: flex;
+  }
+  
+  .template > element {
+    flex: 1;
+  }
+  
+  .button1{
+    padding: 0px;
+    margin: 4px;
+    border-radius: 5px;
+  }
+.todos{
+display: flex;
+flex: 1;
+}

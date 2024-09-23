@@ -33,15 +33,39 @@ const deleteTodo = async (id: number, index: number) => {
   console.log('Todo supprimé');
 };
 
-// const addTodo = async (id: number, index: number) => {
+
+const PostTodo = async () => {
+  // POST request using fetch with async/await
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ label: 'Nouvelle tâche', done: false })
+  };
+  const response = await fetch(`http://localhost:3000/todos`, requestOptions);
+  // const data = await response.json();
+  if (!response.ok) {
+    console.error(response.status);
+    console.log('Erreur creation pour cause de '+ response.status);
+
+  } else {
+    monTableau.value.push( await response.json());
+    console.log('Todo Ajoute');
+
+  }
+
+
+// const addTodo = async () => {
 // // Ajout du todo sur le serveur
-// await fetch(`http://localhost:3000/todos/${id}`, {
+// const newTodo = { label: 'Nouvelle tâche', done: false };
+
+// await fetch(`http://localhost:3000/todos`, {
 // method: 'POST',
+
 // });
 // // Mise à jour locale du tableau
 // monTableau.value.splice(index, 1);
 // console.log('Todo Ajoute');
-// };
+};
 
 
 
@@ -53,14 +77,23 @@ const deleteTodo = async (id: number, index: number) => {
   pair</span>
   <span v-else>Mon tableau est impair</span>
   <br />
-  <TodoComponent
-  v-for="(element, index) in monTableau"
-  :todo="element"
-  v-bind:key="element.id"
-  @onInput="onTodoInput($event, index)"
-  />
-  <button @click="deleteTodo(element.id, index)">Supprimer</button>
-  </template>
+  <div class="todos"
+    v-for="(element, index) in monTableau" :key="element.id">
+    <TodoComponent :todo="element" @onInput="onTodoInput($event, index)" />
+    <button class="button button1" @click="deleteTodo(element.id, index)">Supprimer</button>
+  </div>
+  <button @click="PostTodo()">Ajouter un todo</button>
+</template>
   
+
+
+
+
+  <!-- <div v-for="(element, index) in monTableau" :key="element.id">
+    <TodoComponent :todo="element" @onInput="onTodoInput($event, index)" />
+    <button @click="deleteTodo(element.id, index)">Supprimer</button>
+  </div>
+  <button @click="ajouterElement">Ajouter une tâche</button>
+ -->
 
 <style scoped></style>
