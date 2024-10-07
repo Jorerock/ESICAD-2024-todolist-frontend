@@ -28,7 +28,9 @@ const onCancelText = () => {
       <element :class="{ checked: props.todo.done }">
     <span v-if="!editMode">
         <span @click="editMode = !editMode">
-            {{ props.todo.label }}
+            {{ props.todo.label }} |
+            {{ props.todo.dueDate}}
+
         </span>
         <input type="checkbox" :checked="props.todo.done" @click="(event: any) => onInput(event.target?.checked)" />
         <br />
@@ -51,6 +53,7 @@ const onCancelText = () => {
   padding: 0px;
   margin: 10px;
   border-radius: 5px;
+
 }
 
 element:not(.checked) {
